@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="uz">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <title>2-modul: Advanced CSS & UI Foundations</title>
+        <link rel="stylesheet" href="./css/style.css" />
+    </head>
+    <body>
+        <header class="top">
+            <div class="wrap">
+                <a href="index.html">← Mundarija</a
+                ><span class="sub">12 oylik FullStack kurs</span>
+            </div>
+        </header>
+        <div class="wrap">
+            <h1>2-modul: Advanced CSS &amp; UI Foundations</h1>
+            <p class="sub">
+                2-oy · 12 ta dars · SCSS, animatsiya va chiroyli interfeys
+            </p>
+            <ol class="toc">
+                <li><a href="#d1">SCSS asoslari</a></li>
+                <li><a href="#d2">Nesting &amp; Variables</a></li>
+                <li><a href="#d3">Mixins</a></li>
+                <li><a href="#d4">BEM metodologiyasi</a></li>
+                <li><a href="#d5">Transition &amp; Animations</a></li>
+                <li><a href="#d6">Transformlar</a></li>
+                <li><a href="#d7">UI prinsiplar</a></li>
+                <li><a href="#d8">Figma&#x27;dan HTML/CSS</a></li>
+                <li><a href="#d9">Dark/Light mod</a></li>
+                <li><a href="#d10">Tailwind intro</a></li>
+                <li><a href="#d11">Component-based UI</a></li>
+                <li><a href="#d12">Mini UI Kit loyihasi</a></li>
+            </ol>
+            <section class="lesson" id="d1">
+                <h2><span class="n">1-dars.</span> SCSS asoslari</h2>
+                <p>
+                    SCSS — CSS ning <b>kuchaytirilgan</b> varianti: o'zgaruvchi,
+                    ichma-ich yozish, funksiya bor. Brauzer uni tushunmaydi,
+                    shuning uchun oddiy CSS ga <b>kompilyatsiya</b> qilinadi.
+                    Har bir oddiy CSS kodi SCSS ham hisoblanadi.
+                </p>
+                <pre><code>npm install -g sass
+sass style.scss style.css
+sass --watch style.scss:style.css   # o&#x27;zgarsa avto kompilyatsiya</code></pre>
+            </section>
+            <section class="lesson" id="d2">
+                <h2><span class="n">2-dars.</span> Nesting &amp; Variables</h2>
+                <p>
+                    <b>O'zgaruvchi</b> (<code>$</code>) rang, o'lcham kabi
+                    qiymatni bir joyda saqlaydi: brend rangi o'zgarsa, bitta
+                    joyni tuzatasiz. <b>Nesting</b> ichma-ich yozish imkonini
+                    beradi, <code>&amp;</code> joriy selektorni bildiradi.
+                    Ichma-ich 3 darajadan oshirmang.
+                </p>
+                <pre><code>$primary: #4f46e5;
+$radius: 8px;
+
+.btn {
+  background: $primary;
+  border-radius: $radius;
+  &amp;:hover { background: darken($primary, 10%); }
+  .icon { margin-right: 8px; }
+}</code></pre>
+            </section>
+            <section class="lesson" id="d3">
+                <h2><span class="n">3-dars.</span> Mixins</h2>
+                <p>
+                    Mixin — <b>qayta ishlatiladigan uslublar to'plami</b>. Bir
+                    xil kodni takror yozmaslik uchun. Parametr ham qabul qiladi,
+                    xuddi funksiya kabi.
+                </p>
+                <pre><code>@mixin flex-center($dir: row) {
+  display: flex;
+  flex-direction: $dir;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero { @include flex-center(column); }
+.badge { @include flex-center; }</code></pre>
+            </section>
+            <section class="lesson" id="d4">
+                <h2><span class="n">4-dars.</span> BEM metodologiyasi</h2>
+                <p>
+                    BEM — class nomlash qoidasi:
+                    <b>Block__Element--Modifier</b>. Katta loyihada class
+                    nomlari chalkashib ketmasligi uchun kerak.
+                </p>
+                <p>
+                    Block — mustaqil qism (<code>card</code>), Element — uning
+                    bo'lagi (<code>card__title</code>), Modifier — variant
+                    (<code>card--featured</code>).
+                </p>
+                <pre><code>&lt;div class=&quot;card card--featured&quot;&gt;
+  &lt;h3 class=&quot;card__title&quot;&gt;Sarlavha&lt;/h3&gt;
+  &lt;button class=&quot;card__btn&quot;&gt;Batafsil&lt;/button&gt;
+&lt;/div&gt;
+
+.card { &amp;__title { font-size: 20px; } &amp;--featured { border: 2px solid gold; } }</code></pre>
+            </section>
+            <section class="lesson" id="d5">
+                <h2>
+                    <span class="n">5-dars.</span> Transition &amp; Animations
+                </h2>
+                <p>
+                    <b>Transition</b> — ikki holat orasidagi silliq o'tish
+                    (masalan, hover). <b>@keyframes</b> — o'zingiz bosqichlarini
+                    belgilaydigan animatsiya. Ikkalasi ham 60fps uchun asosan
+                    <code>transform</code> va <code>opacity</code> bilan
+                    ishlasin.
+                </p>
+                <pre><code>.btn { transition: background .3s ease, transform .2s; }
+.btn:hover { transform: translateY(-2px); }
+
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+.modal { animation: fade-in .5s ease forwards; }</code></pre>
+            </section>
+            <section class="lesson" id="d6">
+                <h2><span class="n">6-dars.</span> Transformlar</h2>
+                <p>
+                    Transform elementni <b>joyini buzmasdan</b> siljitadi,
+                    kattalashtiradi yoki aylantiradi: <code>translate</code>,
+                    <code>scale</code>, <code>rotate</code>. Boshqa elementlar
+                    o'z joyida qoladi, shuning uchun animatsiyada tez ishlaydi.
+                </p>
+                <pre><code>.card:hover { transform: scale(1.05) rotate(1deg); }
+.arrow { transform: translateX(10px); }
+.center { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }</code></pre>
+            </section>
+            <section class="lesson" id="d7">
+                <h2><span class="n">7-dars.</span> UI prinsiplar</h2>
+                <p>
+                    Chiroyli interfeys sehr emas, bir necha qoidadan iborat:<br />•
+                    <b>Iyerarxiya:</b> muhim narsa kattaroq va qalinroq.<br />•
+                    <b>Bo'shliq:</b> 8px tizimi (8, 16, 24, 32) ishlating.<br />•
+                    <b>Kontrast:</b> matn foni bilan yaxshi ajralsin (kamida
+                    4.5:1).<br />• <b>Izchillik:</b> bir xil element hamma joyda
+                    bir xil ko'rinsin.<br />• Ko'pi bilan 2 ta shrift va 1 ta
+                    asosiy rang.
+                </p>
+                <pre><code>:root {
+  --space-1: 8px; --space-2: 16px; --space-3: 24px;
+  --text: #1a1a1a; --muted: #6b7280;
+}</code></pre>
+            </section>
+            <section class="lesson" id="d8">
+                <h2><span class="n">8-dars.</span> Figma&#x27;dan HTML/CSS</h2>
+                <p>
+                    Dizayner Figma da maket chizadi, siz uni kodga o'giriladi.
+                    Elementni tanlab <b>Inspect/Dev Mode</b> da rang, shrift,
+                    o'lcham va bo'shliqlarni ko'rasiz. Figma dagi
+                    <b>Auto Layout</b> aynan Flexbox ga mos keladi.
+                </p>
+                <p>
+                    Ish tartibi: avval umumiy maketni (Grid/Flex), keyin
+                    komponentlarni, oxirida detallarni yozing. Ranglar va
+                    shriftlarni CSS o'zgaruvchisiga chiqarib oling.
+                </p>
+                <pre><code>/* Figma dagi &quot;Auto Layout, gap 16, padding 24&quot; */
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px;
+}</code></pre>
+            </section>
+            <section class="lesson" id="d9">
+                <h2><span class="n">9-dars.</span> Dark/Light mod</h2>
+                <p>
+                    Ranglarni CSS o'zgaruvchisida saqlasangiz, mavzu
+                    almashtirish oson: faqat o'zgaruvchi qiymatlari o'zgaradi.
+                    Foydalanuvchi tizim sozlamasini
+                    <code>prefers-color-scheme</code> bilan aniqlaymiz, tugma
+                    bilan esa <code>data-theme</code> orqali qo'lda
+                    almashtiramiz.
+                </p>
+                <pre><code>:root { --bg: #fff; --text: #111; }
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #111; --text: #eee; }
+}
+[data-theme=&quot;dark&quot;] { --bg: #111; --text: #eee; }
+body { background: var(--bg); color: var(--text); }</code></pre>
+            </section>
+            <section class="lesson" id="d10">
+                <h2><span class="n">10-dars.</span> Tailwind intro</h2>
+                <p>
+                    Tailwind — tayyor <b>utility class</b>lar to'plami. CSS
+                    yozish o'rniga HTML ichida class beriladi:
+                    <code>p-4</code> = padding 16px. Afzalligi: tez ishlash.
+                    Kamchiligi: HTML uzun bo'ladi, shuning uchun komponentlarga
+                    ajratish kerak.
+                </p>
+                <pre><code>&lt;button class=&quot;bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700&quot;&gt;
+  Yuborish
+&lt;/button&gt;
+
+&lt;div class=&quot;grid grid-cols-1 md:grid-cols-3 gap-4&quot;&gt;...&lt;/div&gt;</code></pre>
+            </section>
+            <section class="lesson" id="d11">
+                <h2><span class="n">11-dars.</span> Component-based UI</h2>
+                <p>
+                    Interfeysni <b>kichik, mustaqil bo'laklarga</b> bo'lamiz:
+                    button, card, input, modal. Har bir bo'lak variantlarga ega
+                    (o'lcham, rang, holat). Bu fikrlash tarzi keyingi oylarda
+                    React ga o'tishda juda asqotadi.
+                </p>
+                <pre><code>.btn { padding: 10px 18px; border-radius: 8px; border: 0; cursor: pointer; }
+.btn--primary { background: #4f46e5; color: #fff; }
+.btn--outline { background: none; border: 2px solid #4f46e5; }
+.btn--sm { padding: 6px 12px; font-size: 14px; }
+.btn:disabled { opacity: .5; cursor: not-allowed; }</code></pre>
+            </section>
+            <section class="lesson" id="d12">
+                <h2><span class="n">12-dars.</span> Mini UI Kit loyihasi</h2>
+                <p>
+                    O'zingizning kichik UI kitingizni yig'ing va bitta sahifada
+                    namoyish qiling.
+                </p>
+                <p>
+                    <b>Tarkibi:</b> ranglar paleti, tipografiya, 3 xil tugma (+
+                    holatlari), input va forma, card, badge, alert, dark/light
+                    almashtirgich.<br /><b>Talablar:</b> SCSS (o'zgaruvchi +
+                    mixin), BEM nomlash, hover animatsiyalari.
+                </p>
+                <pre><code>ui-kit/
+├── index.html
+└── scss/
+    ├── _variables.scss
+    ├── _mixins.scss
+    ├── components/
+    │   ├── _button.scss
+    │   └── _card.scss
+    └── main.scss</code></pre>
+            </section>
+            <div class="nav">
+                <a href="modul-01.html">← 1-modul</a
+                ><a href="modul-03.html">3-modul →</a>
+            </div>
+        </div>
+    </body>
+</html>

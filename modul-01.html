@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="uz">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <title>1-modul: HTML & CSS</title>
+        <link rel="stylesheet" href="./css/style.css" />
+    </head>
+    <body>
+        <header class="top">
+            <div class="wrap">
+                <a href="index.html">← Mundarija</a
+                ><span class="sub">12 oylik FullStack kurs</span>
+            </div>
+        </header>
+        <div class="wrap">
+            <h1>1-modul: HTML &amp; CSS</h1>
+            <p class="sub">
+                1-oy · 12 ta dars · Veb-sahifaning skeleti va tashqi ko'rinishi
+            </p>
+            <ol class="toc">
+                <li><a href="#d1">HTML kirish, teglarga kirish</a></li>
+                <li><a href="#d2">HTML struktura</a></li>
+                <li><a href="#d3">Semantik HTML</a></li>
+                <li><a href="#d4">CSS asoslari</a></li>
+                <li><a href="#d5">Selectorlar</a></li>
+                <li><a href="#d6">Box model</a></li>
+                <li><a href="#d7">Flexbox</a></li>
+                <li><a href="#d8">Grid</a></li>
+                <li><a href="#d9">CSS Reset &amp; Normalize</a></li>
+                <li><a href="#d10">Responsiv dizayn</a></li>
+                <li><a href="#d11">Media queries</a></li>
+                <li><a href="#d12">Mini loyiha (Landing page)</a></li>
+            </ol>
+            <section class="lesson" id="d1">
+                <h2>
+                    <span class="n">1-dars.</span> HTML kirish, teglarga kirish
+                </h2>
+                <p>
+                    HTML sahifaning <b>mazmunini</b> belgilaydi: matn, rasm,
+                    havola, tugma. Uni uy qurilishidagi g'isht va devorga
+                    o'xshating: CSS keyin bo'yaydi, JS esa eshik-derazani
+                    ishlatadi.
+                </p>
+                <p>
+                    Har bir element <b>teg</b> bilan yoziladi. Ko'pchiligi
+                    ochiluvchi va yopiluvchi juftlikdan iborat. Teg ichidagi
+                    qo'shimcha ma'lumot <b>atribut</b> deyiladi (masalan,
+                    <code>href</code>). <code>img</code>, <code>br</code> kabi
+                    teglar yopilmaydi.
+                </p>
+                <pre><code>&lt;h1&gt;Bosh sarlavha&lt;/h1&gt;
+&lt;p&gt;Bu oddiy &lt;strong&gt;paragraf&lt;/strong&gt;.&lt;/p&gt;
+&lt;a href=&quot;https://uz.wikipedia.org&quot;&gt;Havola&lt;/a&gt;
+&lt;img src=&quot;rasm.jpg&quot; alt=&quot;Rasm tavsifi&quot;&gt;</code></pre>
+            </section>
+            <section class="lesson" id="d2">
+                <h2><span class="n">2-dars.</span> HTML struktura</h2>
+                <p>
+                    Har bir HTML hujjat bir xil skeletga ega.
+                    <code>&lt;head&gt;</code> ichida foydalanuvchiga
+                    ko'rinmaydigan sozlamalar, <code>&lt;body&gt;</code> ichida
+                    ko'rinadigan narsa turadi.
+                </p>
+                <p>
+                    <code>lang="uz"</code> brauzer va qidiruv tizimiga til
+                    haqida xabar beradi. <code>viewport</code> telefonda to'g'ri
+                    ko'rinish uchun shart.
+                </p>
+                <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;uz&quot;&gt;
+&lt;head&gt;
+  &lt;meta charset=&quot;UTF-8&quot;&gt;
+  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot;&gt;
+  &lt;title&gt;Mening sahifam&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Salom!&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+            </section>
+            <section class="lesson" id="d3">
+                <h2><span class="n">3-dars.</span> Semantik HTML</h2>
+                <p>
+                    Semantik teg o'z <b>ma'nosini</b> bildiradi.
+                    <code>&lt;div&gt;</code> hamma narsa bo'lishi mumkin, lekin
+                    <code>&lt;nav&gt;</code> aniq menyu ekanini bildiradi.
+                </p>
+                <p>
+                    Foyda: qidiruv tizimlari (SEO) saytni yaxshi tushunadi,
+                    ekran o'qiydigan dasturlar ko'zi ojizlarga yordam beradi,
+                    kodni o'qish osonlashadi.
+                </p>
+                <pre><code>&lt;header&gt;Logo va menyu&lt;/header&gt;
+&lt;nav&gt;&lt;a href=&quot;/&quot;&gt;Bosh sahifa&lt;/a&gt;&lt;/nav&gt;
+&lt;main&gt;
+  &lt;article&gt;&lt;h2&gt;Maqola&lt;/h2&gt;&lt;/article&gt;
+  &lt;section&gt;&lt;h2&gt;Xizmatlar&lt;/h2&gt;&lt;/section&gt;
+&lt;/main&gt;
+&lt;footer&gt;© 2026&lt;/footer&gt;</code></pre>
+            </section>
+            <section class="lesson" id="d4">
+                <h2><span class="n">4-dars.</span> CSS asoslari</h2>
+                <p>
+                    CSS elementga <b>qanday ko'rinish</b> berishni aytadi.
+                    Qoida: selektor + { xususiyat: qiymat; }. CSS ni ulashning 3
+                    yo'li bor: inline, <code>&lt;style&gt;</code> va alohida
+                    fayl. Amalda <b>alohida fayl</b> ishlatiladi.
+                </p>
+                <pre><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;style.css&quot;&gt;
+
+/* style.css */
+h1 {
+  color: tomato;
+  font-size: 32px;
+}</code></pre>
+            </section>
+            <section class="lesson" id="d5">
+                <h2><span class="n">5-dars.</span> Selectorlar</h2>
+                <p>
+                    Selektor <b>qaysi elementga</b> uslub berishni tanlaydi.
+                    Class (<code>.</code>) qayta ishlatiladi, id
+                    (<code>#</code>) sahifada bitta bo'ladi. Ziddiyat bo'lsa
+                    kuchliroq selektor g'alaba qiladi: id &gt; class &gt; teg.
+                </p>
+                <pre><code>p { color: gray; }            /* barcha p */
+.card { padding: 16px; }      /* class=&quot;card&quot; */
+#logo { width: 80px; }        /* id=&quot;logo&quot; */
+.menu a { color: blue; }      /* menyu ichidagi a */
+button:hover { opacity: .8; } /* kursor ustida */</code></pre>
+            </section>
+            <section class="lesson" id="d6">
+                <h2><span class="n">6-dars.</span> Box model</h2>
+                <p>
+                    Har bir element to'rtburchak quti: <b>content</b> (ichki
+                    mazmun), <b>padding</b> (ichki bo'shliq),
+                    <b>border</b> (chegara), <b>margin</b> (tashqi bo'shliq).
+                </p>
+                <p>
+                    Muhim: <code>box-sizing: border-box</code> bo'lsa width ga
+                    padding va border ham kiradi. Aks holda 300px kenglik 340px
+                    bo'lib qoladi.
+                </p>
+                <pre><code>.box {
+  box-sizing: border-box;
+  width: 300px;
+  padding: 20px;
+  border: 2px solid #333;
+  margin: 16px auto; /* markazlash */
+}</code></pre>
+            </section>
+            <section class="lesson" id="d7">
+                <h2><span class="n">7-dars.</span> Flexbox</h2>
+                <p>
+                    Flexbox elementlarni
+                    <b>bir qatorda yoki ustunda</b> joylashtiradi. Ota elementga
+                    <code>display: flex</code> beriladi, bolalari avtomatik
+                    tartiblanadi.
+                </p>
+                <p>
+                    <code>justify-content</code> asosiy o'q bo'yicha (odatda
+                    gorizontal), <code>align-items</code> kesishuvchi o'q
+                    bo'yicha tekislaydi. Navbar, kartalar qatori uchun ideal.
+                </p>
+                <pre><code>.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}</code></pre>
+            </section>
+            <section class="lesson" id="d8">
+                <h2><span class="n">8-dars.</span> Grid</h2>
+                <p>
+                    Grid <b>2 o'lchamli</b> (qator va ustun) maket uchun. Flex
+                    bir o'qli, Grid ikki o'qli. Mahsulotlar galereyasi uchun
+                    juda qulay.
+                </p>
+                <p>
+                    <code>repeat(auto-fit, minmax(220px, 1fr))</code> — ekran
+                    kengligiga qarab ustunlar soni o'zi o'zgaradi, media query
+                    shart emas.
+                </p>
+                <pre><code>.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}</code></pre>
+            </section>
+            <section class="lesson" id="d9">
+                <h2>
+                    <span class="n">9-dars.</span> CSS Reset &amp; Normalize
+                </h2>
+                <p>
+                    Brauzerlar standart uslublarni (masalan, body ning 8px
+                    margini) turlicha beradi. <b>Reset</b> ularni nolga
+                    tushiradi, <b>Normalize</b> esa farqlarni tenglashtiradi.
+                    Boshlang'ich uchun quyidagi qisqa reset yetadi.
+                </p>
+                <pre><code>*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; font-family: system-ui, sans-serif; line-height: 1.5; }
+img { max-width: 100%; display: block; }</code></pre>
+            </section>
+            <section class="lesson" id="d10">
+                <h2><span class="n">10-dars.</span> Responsiv dizayn</h2>
+                <p>
+                    Sayt telefon, planshet va kompyuterda to'g'ri ko'rinishi
+                    kerak. Qoidalar: <b>mobile-first</b> (avval telefon uchun
+                    yozing), piksel o'rniga <code>%</code>, <code>rem</code>,
+                    <code>max-width</code> ishlating, rasmlarga
+                    <code>max-width: 100%</code> bering.
+                </p>
+                <pre><code>.container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+h1 { font-size: clamp(1.6rem, 4vw, 3rem); }</code></pre>
+            </section>
+            <section class="lesson" id="d11">
+                <h2><span class="n">11-dars.</span> Media queries</h2>
+                <p>
+                    Media query ekran kengligiga qarab uslubni o'zgartiradi.
+                    Mobile-first uslubda <code>min-width</code> ishlatiladi:
+                    asosiy kod telefon uchun, kattaroq ekranlarga qo'shimchalar
+                    yoziladi.
+                </p>
+                <pre><code>.cards { display: grid; gap: 16px; }          /* telefon: 1 ustun */
+
+@media (min-width: 768px) {
+  .cards { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1024px) {
+  .cards { grid-template-columns: repeat(3, 1fr); }
+}</code></pre>
+            </section>
+            <section class="lesson" id="d12">
+                <h2>
+                    <span class="n">12-dars.</span> Mini loyiha (Landing page)
+                </h2>
+                <p>
+                    O'rgangan hamma narsani birlashtiring. Misol: yaxshi ko'rgan
+                    kafe yoki o'quv markazi uchun bir sahifali sayt yarating.
+                </p>
+                <p>
+                    <b>Bo'limlar:</b> header + menyu, hero (sarlavha va tugma),
+                    xizmatlar (Grid), narxlar, aloqa formasi, footer.<br /><b
+                        >Talablar:</b
+                    >
+                    semantik teglar, reset, Flex va Grid, 3 ta breakpointda
+                    to'g'ri ko'rinish. Tugagach GitHub Pages ga joylang.
+                </p>
+                <pre><code>landing/
+├── index.html
+├── css/
+│   └── style.css
+└── img/</code></pre>
+            </section>
+            <div class="nav">
+                <span></span><a href="modul-02.html">2-modul →</a>
+            </div>
+        </div>
+    </body>
+</html>
